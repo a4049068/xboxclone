@@ -1,0 +1,15 @@
+<Project>
+  <!--
+    DashX360 is a WPF application that can only run on Windows.
+    This file lets the project be BUILT on Linux/macOS CI machines too
+    (cross-compilation of WinExe is not supported, so we retarget to Library there).
+    Building on Windows is unaffected.
+  -->
+  <PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
+    <OutputType>Library</OutputType>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <GenerateRuntimeConfigurationFiles>false</GenerateRuntimeConfigurationFiles>
+    <AppHostSourcePath Condition="Exists('$(AppHostSourcePath)')">$(AppHostSourcePath)</AppHostSourcePath>
+    <NoWarn>$(NoWarn);CA1416;CS0067;NU1701</NoWarn>
+  </PropertyGroup>
+</Project>
